@@ -11,7 +11,7 @@
     <xs:element name="GetAllCarsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="country" type="tns:car"/>
+                <xs:element name="car" type="tns:car"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
