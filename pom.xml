@@ -64,11 +64,10 @@
                     <sources>
                         <source>src/main/resources/cars.xsd</source>
                     </sources>
-                    <outputDirectory>src/main/java/soap</outputDirectory>
+                    <outputDirectory>src/main/java/xjc/generated</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
