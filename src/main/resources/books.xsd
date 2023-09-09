@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://seldinpuce.github.io/cars"
+           targetNamespace="http://seldinpuce.github.io/cars"
+           elementFormDefault="qualified">
+
+    <xs:element name="GetAllCarsRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="GetAllCarsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="country" type="tns:car"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="car">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="year" type="xs:int"/>
+            <xs:element name="manufacturer" type="xs:string"/>
+            <xs:element name="engineVolume" type="xs:float"/>
+            <xs:element name="price" type="xs:float"/>
+            <xs:element name="color" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
