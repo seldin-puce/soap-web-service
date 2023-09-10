@@ -1,5 +1,6 @@
 package io.github.seldinpuce.soap.endpoint;
 
+import xjs.generated.car.GetAllCarsResponse;
 import xjs.generated.car.GetCarRequest;
 import io.github.seldinpuce.soap.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,15 @@ public class CarEndpoint {
     public GetCarResponse getCarResponse(@RequestPayload GetCarRequest getCarRequest) {
         var response = new GetCarResponse();
         response.setCar(carService.getCar(getCarRequest.getCarIdentifier()));
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetAllCarsRequest")
+    @ResponsePayload
+    public GetAllCarsResponse getAllCarsResponse() {
+        var response = new GetAllCarsResponse();
+        response.getCar().addAll(carService.getCars());
 
         return response;
     }
