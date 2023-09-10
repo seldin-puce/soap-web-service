@@ -4,6 +4,24 @@
            targetNamespace="http://seldinpuce.github.io/soap/cars"
            elementFormDefault="qualified">
 
+    <xs:element name="GetCarRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carIdentifier" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="GetCarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="car" type="tns:car"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
     <xs:element name="GetAllCarsRequest">
         <xs:complexType/>
     </xs:element>
@@ -11,7 +29,7 @@
     <xs:element name="GetAllCarsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="car" type="tns:car"/>
+                <xs:element name="car" type="tns:car" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

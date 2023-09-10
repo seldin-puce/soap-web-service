@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### JAXB/JAX-RS ###
+xjs/
+META-INF/
