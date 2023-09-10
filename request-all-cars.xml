@@ -1,0 +1,7 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="car.generated.xjs">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:GetAllCarsRequest/>
+    </soapenv:Body>
+</soapenv:Envelope>
