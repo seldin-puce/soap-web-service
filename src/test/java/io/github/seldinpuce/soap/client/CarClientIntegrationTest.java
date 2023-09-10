@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class carClientIntegrationTest {
+public class CarClientIntegrationTest {
 
     private Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 
