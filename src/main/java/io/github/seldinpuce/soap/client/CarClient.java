@@ -3,6 +3,7 @@ package io.github.seldinpuce.soap.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+import xjs.generated.car.GetAllCarsResponse;
 import xjs.generated.car.GetCarResponse;
 
 public class CarClient extends WebServiceGatewaySupport {
@@ -16,6 +17,15 @@ public class CarClient extends WebServiceGatewaySupport {
         request.setCarIdentifier(carIdentifier);
 
         return (GetCarResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(request);
+    }
+
+    public GetAllCarsResponse getAllCars() {
+        logger.info("Requesting all cars");
+
+        var request = new xjs.generated.car.GetAllCarsRequest();
+
+        return (GetAllCarsResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(request);
     }
 }
