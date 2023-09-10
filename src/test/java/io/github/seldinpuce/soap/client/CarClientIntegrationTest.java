@@ -1,56 +1,41 @@
 package io.github.seldinpuce.soap.client;
 
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ClassUtils;
-import org.springframework.ws.client.core.WebServiceTemplate;
-import xjs.generated.car.GetCarRequest;
-import xjs.generated.car.GetCarResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@ActiveProfiles("test")
 public class CarClientIntegrationTest {
 
-    private Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+    @Autowired
+    CarClient carClient;
 
-
-    @LocalServerPort
-    private int port;
-
-    @Before
-    public void init() throws Exception {
-        marshaller.setPackagesToScan(ClassUtils.getPackageName(GetCarRequest.class));
-        marshaller.afterPropertiesSet();
-    }
 
     @Test
     public void whenSendRequest_thenResponseIsNotNull() {
-        WebServiceTemplate ws = new WebServiceTemplate(marshaller);
-        GetCarRequest request = new GetCarRequest();
-        request.setCarIdentifier("a6");
-
-        Object response = ws.marshalSendAndReceive("http://localhost:" + port + "/ws", request);
-
-        assertThat(response).isNotNull();
+        var car = carClient.getCar("A6");
+        assertThat(car).isNotNull();
     }
 
     @Test
     public void whenCarIdentifierIsA6_thenManufacturerIsAudi() {
-        WebServiceTemplate ws = new WebServiceTemplate(marshaller);
-        GetCarRequest request = new GetCarRequest();
-        request.setCarIdentifier("A6");
+        var car = carClient.getCar("A6");
+        assertEquals("Audi", car.getCar().getManufacturer());
+    }
 
-        GetCarResponse response = (GetCarResponse) ws.marshalSendAndReceive("http://localhost:" + port + "/ws", request);
-
-        assertEquals("Audi", response.getCar().getManufacturer());
+    @Test
+    public void whenGetAllCarsResultIsArrayOfCars() {
+        var cars = carClient.getAllCars();
+        var carList = cars.getCar();
+        assertThat(carList).allSatisfy(car -> assertThat(car).isInstanceOf(xjs.generated.car.Car.class));
     }
 }
