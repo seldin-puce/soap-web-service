@@ -64,7 +64,7 @@
                     <sources>
                         <source>src/main/resources/cars.xsd</source>
                     </sources>
-                    <outputDirectory>src/main/java/xjc/generated</outputDirectory>
+                    <outputDirectory>src/main/java</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
                 </configuration>
             </plugin>

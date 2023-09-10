@@ -2,12 +2,12 @@ package io.github.seldinpuce.soap.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+import xjs.generated.car.Car;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.github.seldinpuce.soap.cars.Car;
 
 @Service
 public class CarService {
